@@ -1,0 +1,31 @@
+[package]
+name = "tsqe"
+version = "0.1.0"
+edition = "2024"
+description = "An embeddable time-series engine with Apache Arrow integration"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yourusername/tsqe"
+keywords = ["timeseries", "arrow", "database", "embedded"]
+categories = ["database", "data-structures"]
+
+[dependencies]
+arrow = { version = "55.1.0", features = ["ipc", "prettyprint"] }
+chrono = { version = "0.4.41", features = ["serde", "clock"] }
+thiserror = "1.0.58"
+parking_lot = { version = "0.12.1", features = ["arc_lock"] }  # More efficient synchronization primitives
+sqlparser = { version = "0.56.0", optional = true }  # Only needed for SQL support
+rand = "0.9.1"
+log = "0.4.27"
+arrow-array = "55.1.0"
+arrow-ord = "55.1.0"
+mysql = "24.0.0"
+
+[dev-dependencies]
+arrow = { version = "55.1.0", features = ["ipc", "test_utils"] }  # Note: correct feature is test_utils (plural)
+tokio = { version = "1.0", features = ["full"] }
+criterion = "0.5"
+tempfile = "3.20.0"
+
+[features]
+default = ["dep:sqlparser"]
+sql = ["dep:sqlparser"]  # Optional SQL support
